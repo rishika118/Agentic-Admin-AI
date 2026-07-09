@@ -1,0 +1,3 @@
+# storage/uploads/.gitkeep
+# This file exists only to keep the otherwise-empty uploads/ folder in Git.
+# Uploaded PDFs are ignored by .gitignore.

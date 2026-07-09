@@ -1,0 +1,71 @@
+# ==============================================================================
+# requirements.txt — Backend Python Dependencies
+# ==============================================================================
+# Install all dependencies with:
+#   pip install -r requirements.txt
+#
+# Python version: 3.12
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# Web Framework
+# ------------------------------------------------------------------------------
+fastapi==0.115.5               # The web framework for our API
+uvicorn[standard]==0.32.1      # ASGI server that runs FastAPI
+
+# ------------------------------------------------------------------------------
+# Configuration
+# ------------------------------------------------------------------------------
+pydantic==2.10.3               # Data validation (used everywhere in FastAPI)
+pydantic-settings==2.6.1       # Reads .env files into our Settings class
+
+# ------------------------------------------------------------------------------
+# Database — PostgreSQL
+# ------------------------------------------------------------------------------
+sqlalchemy==2.0.36             # ORM for Python — we'll use it to define tables
+psycopg2-binary==2.9.10        # PostgreSQL driver (binary = no C compiler needed)
+
+# ------------------------------------------------------------------------------
+# Vector Database — Qdrant
+# ------------------------------------------------------------------------------
+qdrant-client==1.12.1          # Official Python client for Qdrant
+
+# ------------------------------------------------------------------------------
+# AI / LLM — LangChain + LangGraph + Ollama
+# ------------------------------------------------------------------------------
+langchain==0.3.9               # Core LangChain library
+langchain-community==0.3.9     # Community integrations (Ollama, etc.)
+langchain-ollama==0.2.1        # LangChain ↔ Ollama integration
+langgraph==0.2.60              # Build agent graphs with LangGraph
+
+# ------------------------------------------------------------------------------
+# Embeddings
+# ------------------------------------------------------------------------------
+sentence-transformers==3.3.1   # Loads BAAI/bge-small-en-v1.5 locally
+
+# ------------------------------------------------------------------------------
+# PDF Parsing
+# ------------------------------------------------------------------------------
+pymupdf==1.24.14               # Fast PDF text extraction (imported as "fitz")
+
+# ------------------------------------------------------------------------------
+# OCR — for scanned PDFs
+# ------------------------------------------------------------------------------
+#paddlepaddle==2.6.2            # PaddlePaddle CPU-only (required by PaddleOCR)
+#paddleocr==2.9.1               # OCR engine
+
+# ------------------------------------------------------------------------------
+# Text Chunking (part of LangChain)
+# Already included with langchain above — listed here for clarity
+# from langchain.text_splitter import RecursiveCharacterTextSplitter
+# ------------------------------------------------------------------------------
+
+# ------------------------------------------------------------------------------
+# File Handling & Utilities
+# ------------------------------------------------------------------------------
+python-multipart==0.0.12       # Required for FastAPI file uploads
+aiofiles==24.1.0               # Async file I/O helpers
+python-dotenv==1.0.1           # Load .env files (belt-and-suspenders alongside pydantic-settings)
+httpx==0.27.2                  # Async HTTP client (used for Ollama health check)
+langchain-text-splitters==0.3.2  # Text chunking utilities (RecursiveCharacterTextSplitter)
+

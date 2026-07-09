@@ -1,0 +1,192 @@
+/* ==========================================================================
+   index.css — Premium Dark Mode Design System for Agentic Admin AI
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Colors - Premium Slate & Emerald Palette */
+  --bg-primary: #0b1120;
+  --bg-secondary: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-hover: #334155;
+  --bg-card: rgba(30, 41, 59, 0.7);
+
+  --accent-emerald: #10b981;
+  --accent-emerald-light: #6ee7b7;
+  --accent-cyan: #06b6d4;
+  --accent-cyan-light: #67e8f9;
+  --accent-indigo: #6366f1;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-focus: rgba(110, 231, 183, 0.4);
+
+  --badge-bg: rgba(16, 185, 129, 0.15);
+  --badge-text: #6ee7b7;
+
+  /* Typography */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Spacing & Borders */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3);
+  --shadow-md: 0 4px 12px rgba(0,0,0,0.4);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.5);
+  --shadow-glow: 0 0 20px rgba(110, 231, 183, 0.15);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+a {
+  color: var(--accent-emerald-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-cyan-light);
+}
+
+/* Glassmorphism utility */
+.glass-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
+/* Button utility */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-emerald), var(--accent-cyan));
+  color: #042f2e;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.35);
+}
+
+.btn-secondary {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--bg-surface-hover);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Form controls */
+.input-field {
+  width: 100%;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--accent-emerald-light);
+  box-shadow: 0 0 0 3px rgba(110, 231, 183, 0.15);
+}
+
+/* Badge utility */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--badge-bg);
+  color: var(--badge-text);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-blue {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--accent-cyan-light);
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fcd34d;
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-surface-hover);
+  border-radius: 4px;
+}
