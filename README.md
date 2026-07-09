@@ -1,246 +1,232 @@
-# Agentic AI for Administrative Support
+# 🤖 Agentic AI for Administrative Support
 
-> An intelligent administrative assistant that answers questions from official documents,
-> generates reports, drafts letters, and compares policies — powered by Local LLMs via Ollama.
+An AI-powered administrative assistant developed as part of my **Summer Internship at NIT Calicut**.
 
----
+The project aims to simplify administrative workflows by combining **Retrieval-Augmented Generation (RAG)** with **Agentic AI**. Instead of functioning as a traditional chatbot, the system is designed to understand institutional documents, reason over them, and assist with administrative tasks such as answering queries, generating reports, drafting official letters, and comparing policies.
 
-## 🗺️ Project Roadmap
-
-| Phase | What We Build | Status |
-|-------|---------------|--------|
-| **1** | Project structure, FastAPI skeleton, React skeleton | ✅ Complete |
-| **2** | PostgreSQL schema + SQLAlchemy ORM | ⏳ Next |
-| **3** | PDF ingestion pipeline (parse → OCR → chunk → embed) | ⬜ |
-| **4** | Qdrant vector store + retrieval | ⬜ |
-| **5** | LangGraph agents (Planner, Retrieval, Task, Citation) | ⬜ |
-| **6** | FastAPI endpoints (upload, chat, report, draft) | ⬜ |
-| **7** | React frontend (full UI) | ⬜ |
+> **Current Status:** MVP under active development.
 
 ---
 
-## 🛠️ Tech Stack
+## ✨ Features
 
-| Layer | Technology |
-|-------|-----------|
-| Backend | Python 3.12 + FastAPI |
-| Frontend | React 18 + Vite |
-| LLM | Ollama → `mistral:latest` |
-| Agents | LangGraph + LangChain |
-| Vector DB | Qdrant |
-| Relational DB | PostgreSQL |
-| Embeddings | `BAAI/bge-small-en-v1.5` |
-| PDF Parsing | PyMuPDF |
-| OCR | PaddleOCR |
+### Current MVP
+- FastAPI backend
+- React + Vite frontend
+- PostgreSQL integration
+- Modular project architecture
+- Local LLM support using Ollama
+- API documentation with Swagger
+- Foundation for document upload and retrieval
+
+### Planned Features
+- PDF ingestion pipeline
+- Automatic OCR for scanned documents
+- Metadata extraction
+- Semantic search using Qdrant
+- Multi-agent workflow using LangGraph
+- Report generation
+- Letter and request drafting
+- Policy comparison
+- Source citation and document redirection
+- Role-based access control
+- Support for Email, Excel, Word, APIs, Google Drive, and SharePoint
 
 ---
 
-## 📁 Project Structure
+# 🏗️ System Architecture
 
 ```
-Agentic-Admin-AI/
+                 +----------------------+
+                 |    React Frontend    |
+                 +----------+-----------+
+                            |
+                            |
+                    FastAPI REST API
+                            |
+        +-------------------+-------------------+
+        |                   |                   |
+        |                   |                   |
+  PostgreSQL           LangGraph Agents      Qdrant
+ (Metadata)           (Planning & Tasks)   (Vector DB)
+        |                   |                   |
+        +-------------------+-------------------+
+                            |
+                      Ollama (Mistral)
+                            |
+                   Retrieved Administrative
+                          Documents
+```
+
+---
+
+# 🛠 Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Backend | FastAPI |
+| Frontend | React + Vite |
+| Language | Python 3.12 |
+| Database | PostgreSQL |
+| Vector Database | Qdrant |
+| LLM | Ollama (Mistral) |
+| Agent Framework | LangGraph |
+| Embeddings | BAAI/bge-small-en-v1.5 |
+| PDF Parsing | PyMuPDF |
+| OCR | PaddleOCR *(planned)* |
+
+---
+
+# 📂 Project Structure
+
+```
+Agentic-Admin-AI
+│
 ├── backend/
-│   ├── app.py              ← FastAPI entry point
-│   ├── config.py           ← All config (reads .env)
-│   ├── requirements.txt    ← Python dependencies
-│   ├── .env.example        ← Copy to .env and fill in values
-│   │
-│   ├── agents/             ← LangGraph agent definitions
-│   │   ├── planner.py      ← Decides which agent to call
-│   │   ├── retrieval.py    ← Searches Qdrant for relevant chunks
-│   │   ├── task.py         ← Reports, drafts, comparisons
-│   │   └── citation.py     ← Attaches source citations
-│   │
-│   ├── ingestion/          ← PDF processing pipeline
-│   │   ├── parser.py       ← Extract text with PyMuPDF
-│   │   ├── ocr.py          ← OCR with PaddleOCR (scanned PDFs)
-│   │   ├── metadata.py     ← Extract title, date, dept, etc.
-│   │   ├── chunking.py     ← Split text into chunks
-│   │   └── embeddings.py   ← Generate vectors
-│   │
-│   ├── rag/                ← Retrieval-Augmented Generation
-│   │   ├── retriever.py    ← Semantic search logic
-│   │   └── vector_store.py ← Qdrant CRUD wrapper
-│   │
-│   ├── tools/              ← Task Agent tools
-│   │   ├── report_tool.py
-│   │   ├── drafting_tool.py
-│   │   └── comparison_tool.py
-│   │
+│   ├── agents/
+│   ├── ingestion/
+│   ├── rag/
+│   ├── routers/
 │   ├── database/
-│   │   └── postgres.py     ← SQLAlchemy engine + ORM models
-│   │
-│   ├── models/             ← Pydantic request/response schemas
-│   ├── prompts/            ← LLM prompt strings
-│   └── templates/          ← Letter/report text templates
+│   ├── models/
+│   ├── tools/
+│   ├── templates/
+│   ├── prompts/
+│   ├── app.py
+│   └── requirements.txt
 │
 ├── frontend/
-│   ├── index.html
-│   ├── vite.config.js
-│   ├── package.json
-│   └── src/
-│       ├── main.jsx        ← React bootstrap
-│       ├── App.jsx         ← Routing + Navbar
-│       ├── index.css       ← Global styles
-│       └── pages/
-│           ├── Dashboard.jsx
-│           ├── Upload.jsx
-│           ├── Assistant.jsx
-│           ├── Report.jsx
-│           └── DraftLetter.jsx
+│   ├── src/
+│   ├── public/
+│   └── package.json
 │
 ├── storage/
-│   ├── uploads/            ← Uploaded PDFs saved here
-│   └── pdfs/               ← Source PDFs from NIT Calicut website
+│   ├── pdfs/
+│   └── uploads/
 │
-├── docs/                   ← Architecture diagrams, notes
-├── .gitignore
+├── docs/
 └── README.md
 ```
 
 ---
 
-## ⚙️ Prerequisites
+# 🚀 Getting Started
 
-Install these **before** running the project:
-
-1. **Python 3.12** — [python.org](https://www.python.org/downloads/)
-2. **Node.js 18+** — [nodejs.org](https://nodejs.org/)
-3. **PostgreSQL 15+** — [postgresql.org](https://www.postgresql.org/download/)
-4. **Qdrant** — Download binary from [qdrant.tech](https://qdrant.tech/documentation/quick-start/)
-5. **Ollama** — [ollama.com](https://ollama.com/)
-
----
-
-## 🚀 Setup Instructions
-
-### Step 1 — Clone the repository
+## Clone the repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/rishika118/Agentic-Admin-AI.git
 cd Agentic-Admin-AI
 ```
 
 ---
 
-### Step 2 — Set up the Backend
+## Backend
 
 ```bash
-# Navigate to the backend folder
 cd backend
 
-# Create a Python virtual environment
 python -m venv venv
 
-# Activate the virtual environment
-# Windows:
+# Windows
 venv\Scripts\activate
-# macOS/Linux:
+
+# Linux / macOS
 source venv/bin/activate
 
-# Install all Python dependencies
 pip install -r requirements.txt
+```
 
-# Copy the environment file
-cp .env.example .env
+Create a `.env` file from `.env.example` and configure your PostgreSQL credentials.
 
-# Edit .env and fill in your PostgreSQL password and other values
-# (Use Notepad, VS Code, or any text editor)
+Run the backend:
+
+```bash
+uvicorn app:app --reload
+```
+
+Swagger documentation:
+
+```
+http://localhost:8000/docs
 ```
 
 ---
 
-### Step 3 — Set up the Frontend
+## Frontend
 
 ```bash
-# Navigate to the frontend folder (from project root)
 cd frontend
 
-# Install Node.js dependencies
 npm install
-```
 
----
-
-### Step 4 — Start External Services
-
-**Start Qdrant** (in a separate terminal):
-```bash
-# Navigate to where you downloaded Qdrant
-./qdrant
-# Qdrant runs on http://localhost:6333
-```
-
-**Start Ollama and pull the model** (in a separate terminal):
-```bash
-# Start Ollama
-ollama serve
-
-# In another terminal, pull the Mistral model
-ollama pull mistral
-```
-
-**Make sure PostgreSQL is running** and you've created the database:
-```sql
--- In psql or pgAdmin:
-CREATE DATABASE agentic_admin;
-```
-
----
-
-### Step 5 — Run the Backend
-
-```bash
-# From the backend/ folder with venv activated
-cd backend
-uvicorn app:app --reload --port 8000
-```
-
-Visit: **http://localhost:8000/docs** — you should see the Swagger UI.
-
----
-
-### Step 6 — Run the Frontend
-
-```bash
-# From the frontend/ folder
-cd frontend
 npm run dev
 ```
 
-Visit: **http://localhost:5173** — you should see the dashboard.
+Open:
+
+```
+http://localhost:5173
+```
 
 ---
 
-## 🧪 How to Test Phase 1
+# 📌 Project Roadmap
 
-After running both servers:
-
-1. Open **http://localhost:8000/health** — should return:
-   ```json
-   {"status": "ok", "app": "Agentic Admin AI", "version": "1.0.0", "environment": "development"}
-   ```
-
-2. Open **http://localhost:8000/docs** — should show the Swagger API documentation.
-
-3. Open **http://localhost:5173** — should show the dark-mode dashboard with navbar.
-
-4. Click through all navbar links: Dashboard, Upload, AI Assistant, Reports, Draft Letter.
-
----
-
-## 📖 Understanding the Code
-
-Each Python file starts with a **docstring** explaining:
-- What the file does
-- Why it exists  
-- How it connects to the rest of the project
-
-Read these comments as you explore the code — they're written for beginners.
+- ✅ FastAPI backend
+- ✅ React frontend
+- ✅ PostgreSQL integration
+- ✅ Modular architecture
+- ⏳ PDF ingestion pipeline
+- ⏳ Qdrant vector search
+- ⏳ LangGraph multi-agent workflow
+- ⏳ Report generation
+- ⏳ Letter drafting
+- ⏳ Policy comparison
+- ⏳ Incremental indexing
+- ⏳ Role-based access control
 
 ---
 
-## 👨‍💻 Author
+# 🎯 Future Scope
 
-Summer Internship Project — NIT Calicut  
-Built with ❤️ using FastAPI, React, LangGraph, and Ollama.
+The architecture has been designed to support additional enterprise data sources, including:
+
+- Internal administrative documents
+- Emails
+- Excel spreadsheets
+- Word documents
+- Databases
+- REST APIs
+- Google Drive
+- Microsoft SharePoint
+
+without requiring significant architectural changes.
+
+---
+
+# 📚 Internship Project
+
+**Project:** Agentic AI for Administrative Support
+
+**Organization:** National Institute of Technology Calicut (NIT Calicut)
+
+**Objective**
+
+Build a scalable Agentic AI platform capable of understanding administrative knowledge and assisting with institutional workflows through autonomous reasoning, document retrieval, and intelligent task execution.
+
+---
+
+# 👩‍💻 Author
+
+**Rishika Anand**
+
+B.Tech Data Science Student
+
+Summer Intern — NIT Calicut
+
+---
+
+## ⭐ Acknowledgements
+
+This project is being developed as part of the **NIT Calicut Summer Internship Program** and serves as an MVP for a scalable Agentic AI platform for administrative support.
