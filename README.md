@@ -171,22 +171,6 @@ http://localhost:5173
 
 ---
 
-# 📌 Project Roadmap
-
-- ✅ FastAPI backend
-- ✅ React frontend
-- ✅ PostgreSQL integration
-- ✅ Modular architecture
-- ⏳ PDF ingestion pipeline
-- ⏳ Qdrant vector search
-- ⏳ LangGraph multi-agent workflow
-- ⏳ Report generation
-- ⏳ Letter drafting
-- ⏳ Policy comparison
-- ⏳ Incremental indexing
-- ⏳ Role-based access control
-
----
 
 # 🎯 Future Scope
 
@@ -205,27 +189,8 @@ without requiring significant architectural changes.
 
 ---
 
-# 📚 Internship Project
 
-**Project:** Agentic AI for Administrative Support
 
-**Organization:** National Institute of Technology Calicut (NIT Calicut)
-
-**Objective**
-
-Build a scalable Agentic AI platform capable of understanding administrative knowledge and assisting with institutional workflows through autonomous reasoning, document retrieval, and intelligent task execution.
-
----
-
-# 👩‍💻 Author
-
-**Rishika Anand**
-
-B.Tech Data Science Student
-
-Summer Intern — NIT Calicut
-
----
 
 ## ⭐ Acknowledgements
 
