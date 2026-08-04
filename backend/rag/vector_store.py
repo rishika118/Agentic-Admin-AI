@@ -61,7 +61,7 @@ def _get_client() -> QdrantClient:
             host=settings.QDRANT_HOST,
             port=settings.QDRANT_PORT,
             prefer_grpc=False,          # Use REST (HTTP) instead of gRPC
-            check_compatibility=False,  # Skip version mismatch warnings
+            
         )
     return _client
 

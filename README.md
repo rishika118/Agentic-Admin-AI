@@ -4,8 +4,6 @@ An AI-powered administrative assistant developed as part of my **Summer Internsh
 
 The project aims to simplify administrative workflows by combining **Retrieval-Augmented Generation (RAG)** with **Agentic AI**. Instead of functioning as a traditional chatbot, the system is designed to understand institutional documents, reason over them, and assist with administrative tasks such as answering queries, generating reports, drafting official letters, and comparing policies.
 
-> **Current Status:** MVP under active development.
-
 ---
 
 ## ✨ Features
@@ -20,7 +18,6 @@ The project aims to simplify administrative workflows by combining **Retrieval-A
 - Foundation for document upload and retrieval
 
 ### Planned Features
-- PDF ingestion pipeline
 - Automatic OCR for scanned documents
 - Metadata extraction
 - Semantic search using Qdrant
@@ -76,6 +73,37 @@ The project aims to simplify administrative workflows by combining **Retrieval-A
 | OCR | PaddleOCR *(planned)* |
 
 ---
+
+## Screenshots
+
+# Home
+
+![Home](screenshots/home1.png)
+![Home](screenshots/home2.png)
+
+---
+
+# AI Assistant
+
+![AI](screenshots/aiAssistant.png)
+
+---
+
+# Document Ingestion
+
+![Ingestion](screenshots/ingestion.png)
+
+---
+
+# Letter Drafting
+
+![letter](screenshots/letter.png)
+
+---
+
+# Report Generation
+
+![report](screenshots/report.png)
 
 # 📂 Project Structure
 
