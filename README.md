@@ -79,6 +79,7 @@ The project aims to simplify administrative workflows by combining **Retrieval-A
 # Home
 
 ![Home](screenshots/home1.png)
+
 ![Home](screenshots/home2.png)
 
 ---
